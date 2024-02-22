@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: 'postgres:16.1'
+    command: "-c max_connections=1000"
+    container_name: newsletter_postgres
+    environment:
+      - 'POSTGRES_HOST=localhost'
+      - 'POSTGRES_DB=newsletter'
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=password'
+    ports:
+      - '5432:5432'
+    
