@@ -1,6 +1,6 @@
 use actix_web::{web, HttpResponse};
 use chrono::Utc;
-use sqlx::{query, PgPool};
+use sqlx::PgPool;
 use tracing::Instrument;
 use uuid::Uuid;
 
@@ -45,9 +45,7 @@ pub async fn subscribe(form: web::Form<FormData>, db_pool: web::Data<PgPool>) ->
     .instrument(query_span)
     .await
     {
-        Ok(_) => {
-            HttpResponse::Ok().finish()
-        }
+        Ok(_) => HttpResponse::Ok().finish(),
         Err(e) => {
             tracing::error!(
                 "request_id {} - Failed to execute query: {:?}",
